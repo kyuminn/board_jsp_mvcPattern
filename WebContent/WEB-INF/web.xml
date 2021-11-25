@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <display-name>org.board2</display-name>
+	
+	<resource-ref>
+		<description>ConnectionPool</description>
+		<res-ref-name>jdbc/myOracle</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+	
+	<servlet>
+		<servlet-name>Controller</servlet-name>
+		<servlet-class>boardtwo.controller.ControllerAction</servlet-class>
+		<init-param>
+			<param-name>propertyConfig</param-name>
+			<param-value>CommandPro.properties</param-value>
+		</init-param>
+	</servlet>
+	<!--  *.do 로 끝나는 명령어가 나오면 Controller 이름의 servlet이 수행됨
+	여기서는 이 서블릿이 Front Controller 역할을 함 ( 모든 요청을 받고, 각 요청을 분리해서 맞는 역할의 서블릿에게 넘김)
+	 -->
+	<servlet-mapping>
+		<servlet-name>Controller</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+</web-app>
